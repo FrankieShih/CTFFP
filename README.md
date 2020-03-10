@@ -1,1 +1,1 @@
-# CTF_Final_Project
+# The final project of Continuous Time Finance 
