@@ -18,10 +18,10 @@ function price_Derivative = get_derivatives_price(T,r,d,K,S,sigma,type_derivativ
 %    price_Derivative  
 
 % call&put parameters
-d1 = (log(S/K) + (r + sigma^2/2)*T) / (sigam * sqrt(T));
+d1 = (log(S/K) + (r + sigma^2/2)*T) / (sigma * sqrt(T));
 d2 = d1 - sigma*sqrt(T);
 % digital call&put parmeters
-dd = (log(K/S)-(r-sigma^2/2)*T) / (sigam * sqrt(T));
+dd = (log(K/S)-(r - d - sigma^2/2)*T) / (sigma * sqrt(T));
 
 switch type_derivative
     case 0 % forward contract
@@ -31,9 +31,9 @@ switch type_derivative
     case 2 % put option
         price_Derivative =  K * exp(-r*T) * normcdf(-d2) - S * normcdf(-d1);
     case 3 % digital call option
-        price_Derivative = exp(-r*T) * normcdf(-dd);
+        price_Derivative = K * exp(-r*T) * normcdf(-dd);
     case 4 %  digital put option
-        price_Derivative = exp(-r*T) * normcdf(dd);
+        price_Derivative = K * exp(-r*T) * normcdf(dd);
     otherwise % zero coupon bond
         price_Derivative = K * exp(-r*T);
 end %switch
